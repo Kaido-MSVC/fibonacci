@@ -1,0 +1,37 @@
+# 建置、發行與測試產物
+/build/
+/dist/
+[Bb]in/
+[Oo]bj/
+.vs/
+*.obj
+*.exe
+*.dll
+*.lib
+*.exp
+*.pdb
+*.ilk
+*.tlog
+*.aps
+*.ipch
+*.log
+*.binlog
+*.msixbundle
+
+# 本機編輯器與發行設定
+/.vscode/c_cpp_properties.json
+*.user
+*.suo
+*.VC.db
+*.VC.opendb
+
+# 本機環境與簽署金鑰
+.env
+.env.*
+!.env.example
+*.pfx
+*.p12
+*.snk
+*.key
+*.pem
+*.pubxml.user

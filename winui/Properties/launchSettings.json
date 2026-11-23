@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "FibonacciWinUI (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "FibonacciWinUI (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
