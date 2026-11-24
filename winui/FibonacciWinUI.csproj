@@ -11,6 +11,8 @@
     <RuntimeIdentifier Condition="'$(RuntimeIdentifier)' == ''">win-x64</RuntimeIdentifier>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DefaultLanguage>zh-TW</DefaultLanguage>
+    <Version>1.0.1</Version>
+    <Copyright>Copyright (c) 2026 Kaido-MSVC</Copyright>
     <NativeOutputDir>$(MSBuildProjectDirectory)\obj\native\$(Configuration)</NativeOutputDir>
     <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
     <PublishProfile Condition="'$(FibonacciPortable)' != 'true' And Exists('Properties\PublishProfiles\win-$(Platform).pubxml')">win-$(Platform).pubxml</PublishProfile>
@@ -26,9 +28,10 @@
     <WindowsPackageType>None</WindowsPackageType>
     <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
     <SelfContained>true</SelfContained>
-    <PublishSingleFile>true</PublishSingleFile>
-    <IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
-    <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+    <!-- Use the net8.0 projection binaries listed in the Windows SDK REDIST. -->
+    <WindowsSdkPackageVersion>10.0.26100.86</WindowsSdkPackageVersion>
+    <DebugType>none</DebugType>
+    <EnableDefaultNoneItems>false</EnableDefaultNoneItems>
   </PropertyGroup>
 
   <ItemGroup>
@@ -36,7 +39,7 @@
     <EmbeddedResource Include="..\licenses\Boost-1.92.0.txt" LogicalName="Fibonacci.BoostLicense" />
   </ItemGroup>
 
-  <ItemGroup>
+  <ItemGroup Condition="'$(FibonacciPortable)' != 'true'">
     <Content Include="Assets\SplashScreen.scale-200.png" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\Square150x150Logo.scale-200.png" />
@@ -77,7 +80,9 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.WindowsAppSDK" Version="2.7.0" />
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="2.7.0" Condition="'$(FibonacciPortable)' != 'true'" />
+    <PackageReference Include="Microsoft.WindowsAppSDK.WinUI" Version="2.7.0" Condition="'$(FibonacciPortable)' == 'true'" />
+    <PackageReference Include="Microsoft.WindowsAppSDK.DWrite" Version="2.7.0" Condition="'$(FibonacciPortable)' == 'true'" />
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools.WinApp" Version="0.8.0" />
   </ItemGroup>
 

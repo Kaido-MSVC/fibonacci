@@ -1,6 +1,6 @@
-# 費波那契數列計算器 WinUI 3 實驗版
+# 費波那契數列計算器 WinUI 3 版
 
-這個實驗專案使用 C#、XAML、.NET 11 和 Windows App SDK 2.7.0。`FibonacciNative.dll` 使用 C++23 和 Boost.Multiprecision 1.92.0，直接編入根目錄的 `fibonacci_core.hpp`，沿用 Fast Doubling 演算法及輸入解析規則。
+這個專案使用 C#、XAML、.NET 11 和 Windows App SDK 2.7.0。`FibonacciNative.dll` 使用 C++23 和 Boost.Multiprecision 1.92.0，直接編入根目錄的 `fibonacci_core.hpp`，沿用 Fast Doubling 演算法及輸入解析規則。
 
 ## 建置與啟動
 
@@ -22,20 +22,18 @@ winapp run . --arch x64 --devtools off --detach --output-appx-directory .\obj\Ap
 
 主畫面右上角的「關於」會顯示版本、MIT 授權及 Boost Software License 1.0 的完整條文。
 
-## 單檔 EXE
+## ZIP 封裝
 
-本機測試用的 Windows x64 單檔 EXE 包含 .NET 和 Windows App SDK，首次啟動會將執行階段解壓縮至本機暫存目錄。
+Windows x64 ZIP 採免安裝、自包含的資料夾部署。請完整解壓縮，再執行 `FibonacciWinUI.exe`。啟動程式需要同一資料夾中的 DLL、資源和設定檔。
 
-若要從原始碼產生單檔 EXE，請在此目錄執行以下命令：
+從 `winui` 目錄執行下列命令，將 Release 建置輸出到新的空目錄。`FibonacciPortable` 啟用 ZIP 專用設定，包括 WinUI 及 DWrite 元件參照，以及 Windows SDK .NET 10.0.26100.86 的 `lib/net8.0` 投影套件。
 
 ```powershell
-dotnet publish .\FibonacciWinUI.csproj -c Release -r win-x64 -p:Platform=x64 -p:FibonacciPortable=true --artifacts-path .\obj\portable-artifacts -o .\obj\portable-publish
+dotnet publish .\FibonacciWinUI.csproj -c Release -r win-x64 -p:Platform=x64 -p:FibonacciPortable=true --artifacts-path .\obj\zip-artifacts -o .\obj\zip-publish
 ```
 
-單檔執行檔位於 `obj\portable-publish\FibonacciWinUI.exe`。此命令產生本機建置輸出。
+從 `obj\zip-publish` 取用執行檔及同目錄的執行階段檔案。把 `portable/` 內的兩份文件及根目錄 `LICENSE` 放在 ZIP 內的執行檔旁，依第三方聲明的對照表附上 `licenses/` 內的授權與聲明。核對實際檔案、測試解壓後的程式，再產生 ZIP 與 SHA-256。執行階段升版後須重新核對授權及散布內容。
 
 ### 二進位散布
 
-現有的 1.0.0 ZIP 供本機測試。內部的 EXE 含有額外的專案與建置檔案，ZIP 也缺少 WinUI 範本的著作權與授權聲明，以及 Windows SDK .NET 目標套件的授權說明。準備新版封裝時，請檢查 EXE 內的檔案，排除多餘的建置內容，依實際版本附上專案、範本、Boost 和各第三方元件的授權及聲明，並重建 SHA-256 檢查碼。
-
-Windows App SDK 2.7.0 與 Windows ML 相關套件的授權第 3 節允許在符合條件下隨應用程式散布元件。散布者須要求下游散布者和外部使用者同意至少提供同等保護的條款。公開 ZIP 下載與首次啟動的同意方式仍待確認。Windows SDK .NET 目標套件則有自己的再散布條件。[Windows App SDK 2.7.0 授權](https://www.nuget.org/packages/Microsoft.WindowsAppSDK/2.7.0/License) · [Windows SDK 授權](https://learn.microsoft.com/en-us/legal/windows-sdk/license)
+舊版 1.0.0 單檔 ZIP 供本機測試。1.0.1 是資料夾式 ZIP，移除 Windows ML、AI 等未使用的套件。含微軟再散布元件的公開下載仍需處理下游散布者與外部使用者的條款同意方式。請查閱[隨包第三方授權與散布條件](portable/THIRD-PARTY-NOTICES.md)。

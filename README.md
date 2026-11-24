@@ -2,7 +2,7 @@
 
 使用 Boost.Multiprecision 的 `cpp_int` 和 Fast Doubling 計算 F(N)。N 可介於 0 與 1,000,000。主控台版輸入的 N 超過 10,000 時，按 Enter 顯示前後各 50 位，輸入 `y` 或 `Y` 可顯示完整數字。
 
-WinUI 3 版的啟動與單檔發行方式請參考 [WinUI 3 說明](winui/README.md)。
+WinUI 3 版的啟動與 ZIP 封裝方式請參考 [WinUI 3 說明](winui/README.md)。
 
 ## Windows 建置
 
@@ -26,9 +26,9 @@ WinUI 3 版的啟動與單檔發行方式請參考 [WinUI 3 說明](winui/README
 - 支援各螢幕不同 DPI 縮放（Per-Monitor V2），並使用 Common Controls v6 視覺樣式。
 - GUI 版使用 Windows Runtime 剪貼簿，連結 Windows SDK 的 `user32.lib`、`gdi32.lib` 和 `windowsapp.lib`。Boost 仍只使用標頭檔。
 
-## WinUI 3 實驗版
+## WinUI 3 版
 
-`winui` 是獨立的 C# / XAML 專案，透過原生 DLL 共用 `fibonacci_core.hpp`。建置與啟動方式見 [WinUI 3 實驗版說明](winui/README.md)。
+`winui` 是獨立的 C# / XAML 專案，透過原生 DLL 共用 `fibonacci_core.hpp`。建置與啟動方式見 [WinUI 3 說明](winui/README.md)。
 
 ## C++23 功能
 
@@ -44,4 +44,4 @@ WinUI 3 版的啟動與單檔發行方式請參考 [WinUI 3 說明](winui/README
 
 WinUI 3 的部分專案檔與圖檔（含 AppIcon.ico）源自 Microsoft 的 [WinUI 3 C# Blank App 範本](https://www.nuget.org/packages/Microsoft.WindowsAppSDK.WinUI.CSharp.Templates/0.0.8-alpha)。本專案保留 [Microsoft 著作權與 MIT 授權聲明](licenses/WinUI-Templates-MIT.txt)。
 
-Git 追蹤原始碼、範本素材與套件參照。Windows App SDK 等執行階段由建置時還原，本機的 ZIP 與其他建置產物由 Git 排除。自行封裝 WinUI 執行檔時，請參考 [單檔 EXE 的授權與散布條件](winui/README.md#單檔-exe)。
+Git 追蹤原始碼、範本素材與套件參照。Windows App SDK 等執行階段由建置時還原，本機的 ZIP 與其他建置產物由 Git 排除。自行封裝 WinUI 執行檔時，請參考 [ZIP 封裝](winui/README.md#zip-封裝)及[第三方授權與散布條件](winui/portable/THIRD-PARTY-NOTICES.md)。
