@@ -4,6 +4,18 @@
 
 WinUI 3 版的啟動與 ZIP 封裝方式請參考 [WinUI 3 說明](winui/README.md)。
 
+## 下載與發布狀態
+
+| 版本 | 公開原始碼 | 預先編譯成品 |
+| --- | --- | --- |
+| C# / WinUI 3 | 有 | [v1.0.1 Windows x64 Portable ZIP 與 SHA-256](https://github.com/Kaido-MSVC/fibonacci/releases/tag/v1.0.1) |
+| C++23 / Win32 GUI | 有 | 暫不提供，請自行建置 |
+| C++23 / CLI | 有 | 暫不提供，請自行建置 |
+
+Win32 GUI 與 CLI 均已完成 MSVC x64 Release 建置及功能回歸驗收。由於 Microsoft Visual C++ 執行階段相關靜態內嵌程式碼的再散布依據，以及相關授權條件的履行方式尚待釐清，本專案暫不公開這兩個版本的預先編譯執行檔。`/MT` 與 `/MD` 皆已完成技術評估；這是本專案目前的發布決策，不代表 Microsoft 已禁止散布使用 MSVC 編譯的應用程式。
+
+相關文件：[Visual Studio Community 2026 授權條款](https://visualstudio.microsoft.com/license-terms/vs2026-ga-community/) · [Visual Studio 2026 再散布清單](https://learn.microsoft.com/en-us/visualstudio/releases/2026/redistribution)。
+
 ## Windows 建置
 
 建置使用 Visual Studio 2026、MSVC x64 工具集 14.52、Windows SDK 10.0.28000.0 和 Boost 1.92.0。請從 [Boost 官方發行頁](https://www.boost.org/releases/1.92.0/) 取得 `boost_1_92_0.7z`，以 `Get-FileHash -Algorithm SHA256` 確認 SHA-256 為 `57f2ded2390068a44d88748425067e01a8c285257a4d9611d04ade9d8ec68615`，再解壓縮至 `%LOCALAPPDATA%\Fibonacci`。建置會從 `%LOCALAPPDATA%\Fibonacci\boost_1_92_0\boost` 讀取標頭檔。這個專案的 `cpp_int` 用法只需要 Boost 標頭檔。
